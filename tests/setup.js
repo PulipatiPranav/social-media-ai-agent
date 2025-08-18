@@ -1,6 +1,12 @@
 // Test setup file
 const mongoose = require('mongoose');
 
+// Set up test environment variables
+process.env.JWT_SECRET = 'test-jwt-secret-key';
+process.env.JWT_REFRESH_SECRET = 'test-jwt-refresh-secret-key';
+process.env.JWT_EXPIRES_IN = '15m';
+process.env.JWT_REFRESH_EXPIRES_IN = '7d';
+
 // Increase timeout for database operations
 jest.setTimeout(10000);
 
