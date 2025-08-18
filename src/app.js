@@ -4,6 +4,7 @@ const { globalErrorHandler, handleNotFound } = require('./middleware/errorHandle
 const requestLogger = require('./middleware/requestLogger');
 const indexRoutes = require('./routes/index');
 const authRoutes = require('./routes/auth');
+const aiRoutes = require('./routes/ai');
 const logger = require('./config/logger');
 
 const app = express();
@@ -24,9 +25,9 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Routes
 app.use('/api', indexRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Future route placeholders (will be implemented in subsequent tasks)
-// app.use('/api/ai', aiRoutes);
 // app.use('/api/social', socialRoutes);
 // app.use('/api/analytics', analyticsRoutes);
 // app.use('/api/schedule', scheduleRoutes);

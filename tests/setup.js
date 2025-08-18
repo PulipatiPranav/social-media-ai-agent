@@ -6,6 +6,7 @@ process.env.JWT_SECRET = 'test-jwt-secret-key';
 process.env.JWT_REFRESH_SECRET = 'test-jwt-refresh-secret-key';
 process.env.JWT_EXPIRES_IN = '15m';
 process.env.JWT_REFRESH_EXPIRES_IN = '7d';
+process.env.OPENAI_API_KEY = 'test-openai-key-sk-1234567890abcdef';
 
 // Increase timeout for database operations
 jest.setTimeout(10000);
