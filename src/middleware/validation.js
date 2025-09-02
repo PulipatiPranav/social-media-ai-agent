@@ -89,7 +89,60 @@ const sanitize = (req, res, next) => {
   next();
 };
 
+/**
+ * Validation middleware that accepts schema object with different properties
+ * @param {Object} schemas - Object containing validation schemas for different request properties
+ * @returns {Function} Express middleware function
+ */
+const validateRequest = (schemas) => {
+  return (req, res, next) => {
+    const errors = [];
+
+    // Validate each specified property
+    for (const [property, schema] of Object.entries(schemas)) {
+      const { error, value } = schema.validate(req[property], {
+        abortEarly: false,
+        stripUnknown: true,
+        convert: true
+      });
+
+      if (error) {
+        const errorDetails = error.details.map(detail => ({
+          field: `${property}.${detail.path.join('.')}`,
+          message: detail.message,
+          value: detail.context?.value
+        }));
+        errors.push(...errorDetails);
+      } else {
+        // Replace with validated value
+        req[property] = value;
+      }
+    }
+
+    if (errors.length > 0) {
+      logger.warn('Validation error:', {
+        endpoint: req.originalUrl,
+        method: req.method,
+        errors,
+        ip: req.ip
+      });
+
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Invalid input data',
+          details: errors
+        }
+      });
+    }
+
+    next();
+  };
+};
+
 module.exports = {
   validate,
+  validateRequest,
   sanitize
 };

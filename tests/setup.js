@@ -7,6 +7,18 @@ process.env.JWT_REFRESH_SECRET = 'test-jwt-refresh-secret-key';
 process.env.JWT_EXPIRES_IN = '15m';
 process.env.JWT_REFRESH_EXPIRES_IN = '7d';
 process.env.OPENAI_API_KEY = 'test-openai-key-sk-1234567890abcdef';
+process.env.ENCRYPTION_KEY = '12345678901234567890123456789012'; // 32 characters for OAuth token encryption
+
+// OAuth Configuration for tests
+process.env.INSTAGRAM_CLIENT_ID = 'test_instagram_client_id';
+process.env.INSTAGRAM_CLIENT_SECRET = 'test_instagram_client_secret';
+process.env.INSTAGRAM_REDIRECT_URI = 'http://localhost:3000/api/social/callback/instagram';
+process.env.TIKTOK_CLIENT_KEY = 'test_tiktok_client_key';
+process.env.TIKTOK_CLIENT_SECRET = 'test_tiktok_client_secret';
+process.env.TIKTOK_REDIRECT_URI = 'http://localhost:3000/api/social/callback/tiktok';
+process.env.YOUTUBE_CLIENT_ID = 'test_youtube_client_id';
+process.env.YOUTUBE_CLIENT_SECRET = 'test_youtube_client_secret';
+process.env.YOUTUBE_REDIRECT_URI = 'http://localhost:3000/api/social/callback/youtube';
 
 // Increase timeout for database operations
 jest.setTimeout(10000);
